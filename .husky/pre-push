@@ -1,0 +1,1 @@
+#!/usr/bin/env sh\n. "/_/husky.sh"\npnpm typecheck && pnpm build

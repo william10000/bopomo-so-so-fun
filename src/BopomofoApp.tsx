@@ -195,16 +195,16 @@ const BopomofoApp = () => {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 p-8">
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => setCurrentScreen('home')}
-            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 text-xl hover:bg-gray-100"
+            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
           >
             <Home size={24} /> Home
           </button>
 
-          <div className="bg-white rounded-3xl p-12 shadow-2xl text-center">
+          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
             <h2 className="text-4xl font-bold text-purple-700 mb-6">Learn Symbols</h2>
 
             <div className="flex gap-3 justify-center mb-8">
@@ -295,16 +295,16 @@ const BopomofoApp = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-200 via-blue-200 to-purple-200 p-8">
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => setCurrentScreen('home')}
-            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 text-xl hover:bg-gray-100"
+            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
           >
             <Home size={24} /> Home
           </button>
 
-          <div className="bg-white rounded-3xl p-12 shadow-2xl text-center">
+          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
             <h2 className="text-4xl font-bold text-pink-700 mb-8">Flashcards</h2>
             
             {card && (
@@ -351,12 +351,12 @@ const BopomofoApp = () => {
 
   const WorksheetScreen = () => {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-200 via-yellow-200 to-green-200 p-8">
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex gap-4 mb-6 print:hidden">
             <button
               onClick={() => setCurrentScreen('home')}
-              className="bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 text-xl hover:bg-gray-100"
+              className="bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
             >
               <Home size={24} /> Home
             </button>
@@ -368,7 +368,7 @@ const BopomofoApp = () => {
             </button>
           </div>
 
-          <div className="bg-white rounded-3xl p-12 shadow-2xl print:shadow-none print:rounded-none">
+          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 print:shadow-none print:rounded-none">
             <h1 className="text-5xl font-bold text-center mb-2 text-blue-700">ㄅㄆㄇ・好好玩</h1>
             <p className="text-2xl text-center mb-2 text-purple-600">Practice Worksheet</p>
             <p className="text-center text-xl mb-8 text-gray-600">Name: ___________________  Date: ___________</p>

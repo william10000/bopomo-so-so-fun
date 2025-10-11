@@ -1,2 +1,14 @@
 node_modules
 .DS_Store
+dist
+*.log
+*.local
+.env
+.env.*
+coverage
+.vite
+.cache
+*.tsbuildinfo
+*.swp
+*.swo
+.husky/_

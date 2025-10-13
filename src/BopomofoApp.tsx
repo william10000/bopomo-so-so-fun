@@ -42,6 +42,96 @@ const BopomofoApp = () => {
     }
   }, [selectedVoice]);
 
+  // ---------- UI Primitives ----------
+  const cn = (...classes: Array<string | false | null | undefined>) =>
+    classes.filter(Boolean).join(' ');
+
+  type ButtonVariant =
+    | 'primary'
+    | 'neutral'
+    | 'outline'
+    | 'blue'
+    | 'pink'
+    | 'purple';
+
+  type ButtonSize = 'lg' | 'md' | 'sm';
+
+  interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    block?: boolean;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+  }
+
+  const Button: React.FC<ButtonProps> = ({
+    variant = 'outline',
+    size = 'md',
+    block = false,
+    leftIcon,
+    rightIcon,
+    className,
+    children,
+    ...props
+  }) => {
+    const sizeStyles =
+      size === 'lg'
+        ? 'h-16 px-8 text-2xl rounded-2xl'
+        : size === 'sm'
+        ? 'h-10 px-4 text-base rounded-xl'
+        : 'h-12 px-6 text-lg rounded-2xl';
+
+    const variantStyles = {
+      primary:
+        'bg-emerald-500 hover:bg-emerald-600 text-white shadow-[0_12px_30px_-12px_rgba(16,185,129,0.65)]',
+      neutral: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
+      outline:
+        'bg-white text-gray-900 ring-1 ring-black/10 hover:bg-gray-50',
+      blue: 'bg-blue-500 hover:bg-blue-600 text-white shadow-[0_12px_30px_-12px_rgba(59,130,246,0.65)]',
+      pink: 'bg-pink-500 hover:bg-pink-600 text-white shadow-[0_12px_30px_-12px_rgba(236,72,153,0.65)]',
+      purple: 'bg-purple-600 hover:bg-purple-700 text-white shadow-[0_12px_30px_-12px_rgba(147,51,234,0.65)]'
+    }[variant];
+
+    return (
+      <button
+        className={cn(
+          'inline-flex items-center justify-center gap-2 font-bold transition-all select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 active:translate-y-px disabled:opacity-50 disabled:pointer-events-none',
+          sizeStyles,
+          variantStyles,
+          block && 'w-full',
+          className
+        )}
+        {...props}
+      >
+        {leftIcon}
+        <span>{children}</span>
+        {rightIcon}
+      </button>
+    );
+  };
+
+  interface FilterChipProps {
+    active?: boolean;
+    onClick?: () => void;
+    children?: React.ReactNode;
+    className?: string;
+  }
+
+  const FilterChip: React.FC<FilterChipProps> = ({ active, onClick, children, className }) => (
+    <button
+      onClick={onClick}
+      className={cn(
+        'w-full sm:w-auto whitespace-normal break-words h-auto min-h-[3rem] px-5 py-3 rounded-full text-lg font-bold shadow-sm ring-1 transition-all text-center',
+        active
+          ? 'bg-purple-600 text-white ring-purple-600 shadow-[0_10px_25px_-12px_rgba(147,51,234,0.6)]'
+          : 'bg-white text-purple-700 ring-purple-200 hover:bg-purple-50',
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
+
   // Starting sounds (Initials/Consonants)
   const startingSounds: SymbolItem[] = [
     { symbol: 'ㄅ', pinyin: 'b', sound: 'bo', type: 'starting' },
@@ -136,12 +226,9 @@ const BopomofoApp = () => {
     <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-end mb-6">
-          <button
-            onClick={() => setCurrentScreen('settings')}
-            className="bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-lg hover:bg-gray-100"
-          >
-            <Settings size={24} /> Voice Settings
-          </button>
+          <Button onClick={() => setCurrentScreen('settings')} leftIcon={<Settings size={22} />}>
+            Voice Settings
+          </Button>
         </div>
         
         <h1 className="text-5xl md:text-6xl font-bold text-center mb-2 text-purple-700">
@@ -197,47 +284,33 @@ const BopomofoApp = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => setCurrentScreen('home')}
-            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
-          >
-            <Home size={24} /> Home
-          </button>
+          <div className="mb-6">
+            <Button onClick={() => setCurrentScreen('home')} leftIcon={<Home size={22} />}>
+              Home
+            </Button>
+          </div>
 
-          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
+          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
             <h2 className="text-4xl font-bold text-purple-700 mb-6">Learn Symbols</h2>
 
-            <div className="flex gap-3 justify-center mb-8">
-              <button
-                onClick={() => handleFilterChange('all')}
-                className={`px-6 py-3 rounded-full text-xl font-bold shadow-lg transition ${
-                  symbolFilter === 'all'
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-white text-purple-600 hover:bg-purple-100'
-                }`}
-              >
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 items-stretch sm:justify-center mb-8 px-2">
+              <FilterChip active={symbolFilter === 'all'} onClick={() => handleFilterChange('all')}>
                 All Symbols (37)
-              </button>
-              <button
+              </FilterChip>
+              <FilterChip
+                active={symbolFilter === 'starting'}
                 onClick={() => handleFilterChange('starting')}
-                className={`px-6 py-3 rounded-full text-xl font-bold shadow-lg transition ${
-                  symbolFilter === 'starting'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-blue-600 hover:bg-blue-100'
-                }`}
+                className={! (symbolFilter === 'starting') ? 'text-blue-700 ring-blue-200 hover:bg-blue-50' : ''}
               >
                 🚀 Starting Sounds (21)
-              </button>
-              <button
+              </FilterChip>
+              <FilterChip
+                active={symbolFilter === 'ending'}
                 onClick={() => handleFilterChange('ending')}
-                className={`px-6 py-3 rounded-full text-xl font-bold shadow-lg transition ${
-                  symbolFilter === 'ending'
-                    ? 'bg-pink-600 text-white'
-                    : 'bg-white text-pink-600 hover:bg-pink-100'
-                }`}
+                className={! (symbolFilter === 'ending') ? 'text-pink-600 ring-pink-200 hover:bg-pink-50' : ''}
               >
                 🎯 Ending Sounds (16)
-              </button>
+              </FilterChip>
             </div>
 
             {currentSymbol && (
@@ -254,32 +327,36 @@ const BopomofoApp = () => {
               </div>
             )}
 
-            <button
-              onClick={() => currentSymbol && speakChinese(currentSymbol.sound)}
-              className="bg-green-500 hover:bg-green-600 text-white text-3xl px-12 py-6 rounded-full shadow-xl mb-8 flex items-center gap-4 mx-auto"
-            >
-              <Volume2 size={48} />
-              <span>Play Sound</span>
-            </button>
+            <div className="max-w-md mx-auto mb-8">
+              <Button
+                variant="primary"
+                size="lg"
+                block
+                onClick={() => currentSymbol && speakChinese(currentSymbol.sound)}
+                leftIcon={<Volume2 size={28} />}
+              >
+                Play Sound
+              </Button>
+            </div>
 
-            <div className="flex gap-4 justify-center">
-              <button
+            <div className="grid grid-cols-3 gap-3 items-center max-w-xl mx-auto">
+              <Button
+                variant="neutral"
                 onClick={() => setCurrentSymbolIndex(Math.max(0, currentSymbolIndex - 1))}
                 disabled={currentSymbolIndex === 0}
-                className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white text-2xl px-8 py-4 rounded-full shadow-lg"
               >
                 ← Previous
-              </button>
-              <div className="bg-purple-100 px-6 py-4 rounded-full text-xl">
+              </Button>
+              <div className="justify-self-center bg-purple-100 text-gray-900 px-5 py-3 rounded-full text-lg font-semibold min-w-[84px] text-center">
                 {currentSymbolIndex + 1} / {filteredSymbols.length}
               </div>
-              <button
+              <Button
+                variant="blue"
                 onClick={() => setCurrentSymbolIndex(Math.min(filteredSymbols.length - 1, currentSymbolIndex + 1))}
                 disabled={currentSymbolIndex === filteredSymbols.length - 1}
-                className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white text-2xl px-8 py-4 rounded-full shadow-lg"
               >
                 Next →
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -297,14 +374,13 @@ const BopomofoApp = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => setCurrentScreen('home')}
-            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
-          >
-            <Home size={24} /> Home
-          </button>
+          <div className="mb-6">
+            <Button onClick={() => setCurrentScreen('home')} leftIcon={<Home size={22} />}>
+              Home
+            </Button>
+          </div>
 
-          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
+          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
             <h2 className="text-4xl font-bold text-pink-700 mb-8">Flashcards</h2>
             
             {card && (
@@ -316,32 +392,36 @@ const BopomofoApp = () => {
               </div>
             )}
 
-            <button
-              onClick={() => card && speakChinese(card.word)}
-              className="bg-green-500 hover:bg-green-600 text-white text-3xl px-12 py-6 rounded-full shadow-xl mb-8 flex items-center gap-4 mx-auto"
-            >
-              <Volume2 size={48} />
-              <span>Play Sound</span>
-            </button>
+            <div className="max-w-md mx-auto mb-8">
+              <Button
+                variant="primary"
+                size="lg"
+                block
+                onClick={() => card && speakChinese(card.word)}
+                leftIcon={<Volume2 size={28} />}
+              >
+                Play Sound
+              </Button>
+            </div>
 
-            <div className="flex gap-4 justify-center">
-              <button
+            <div className="grid grid-cols-3 gap-3 items-center max-w-xl mx-auto">
+              <Button
+                variant="neutral"
                 onClick={() => setCurrentFlashcard(Math.max(0, currentFlashcard - 1))}
                 disabled={currentFlashcard === 0}
-                className="bg-pink-500 hover:bg-pink-600 disabled:bg-gray-300 text-white text-2xl px-8 py-4 rounded-full shadow-lg"
               >
                 ← Previous
-              </button>
-              <div className="bg-purple-100 px-6 py-4 rounded-full text-xl">
+              </Button>
+              <div className="justify-self-center bg-purple-100 text-gray-900 px-5 py-3 rounded-full text-lg font-semibold min-w-[84px] text-center">
                 {currentFlashcard + 1} / {flashcards.length}
               </div>
-              <button
+              <Button
+                variant="pink"
                 onClick={() => setCurrentFlashcard(Math.min(flashcards.length - 1, currentFlashcard + 1))}
                 disabled={currentFlashcard === flashcards.length - 1}
-                className="bg-pink-500 hover:bg-pink-600 disabled:bg-gray-300 text-white text-2xl px-8 py-4 rounded-full shadow-lg"
               >
                 Next →
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -353,19 +433,9 @@ const BopomofoApp = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex gap-4 mb-6 print:hidden">
-            <button
-              onClick={() => setCurrentScreen('home')}
-              className="bg-white px-6 py-3 rounded-full shadow-lg ring-1 ring-black/5 flex items-center gap-2 text-xl hover:bg-gray-100"
-            >
-              <Home size={24} /> Home
-            </button>
-            <button
-              onClick={() => window.print()}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 text-xl"
-            >
-              <Printer size={24} /> Print Worksheet
-            </button>
+          <div className="flex gap-3 mb-6 print:hidden">
+            <Button onClick={() => setCurrentScreen('home')} leftIcon={<Home size={22} />}>Home</Button>
+            <Button variant="blue" onClick={() => window.print()} leftIcon={<Printer size={22} />}>Print Worksheet</Button>
           </div>
 
           <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 print:shadow-none print:rounded-none">
@@ -454,12 +524,9 @@ const BopomofoApp = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-8">
         <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => setCurrentScreen('home')}
-            className="mb-6 bg-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 text-xl hover:bg-gray-100"
-          >
-            <Home size={24} /> Home
-          </button>
+          <div className="mb-6">
+            <Button onClick={() => setCurrentScreen('home')} leftIcon={<Home size={22} />}>Home</Button>
+          </div>
 
           <div className="bg-white rounded-3xl p-12 shadow-2xl">
             <h2 className="text-4xl font-bold text-purple-700 mb-8 text-center">🎙️ Voice Settings</h2>
@@ -504,29 +571,15 @@ const BopomofoApp = () => {
             )}
 
             <div className="space-y-4">
-              <button
-                onClick={() => speakChinese('你好')}
-                className="w-full bg-green-500 hover:bg-green-600 text-white text-2xl px-8 py-6 rounded-full shadow-xl flex items-center justify-center gap-4"
-              >
-                <Volume2 size={32} />
-                <span>Test Voice: "你好" (Hello)</span>
-              </button>
-
-              <button
-                onClick={() => speakChinese('ㄅㄆㄇㄈ')}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white text-2xl px-8 py-6 rounded-full shadow-xl flex items-center justify-center gap-4"
-              >
-                <Volume2 size={32} />
-                <span>Test Voice: "ㄅㄆㄇㄈ"</span>
-              </button>
-
-              <button
-                onClick={() => speakChinese('媽媽爸爸')}
-                className="w-full bg-pink-500 hover:bg-pink-600 text-white text-2xl px-8 py-6 rounded-full shadow-xl flex items-center justify-center gap-4"
-              >
-                <Volume2 size={32} />
-                <span>Test Voice: "媽媽爸爸"</span>
-              </button>
+              <Button variant="primary" size="lg" block onClick={() => speakChinese('你好')} leftIcon={<Volume2 size={28} />}>
+                Test Voice: "你好" (Hello)
+              </Button>
+              <Button variant="blue" size="lg" block onClick={() => speakChinese('ㄅㄆㄇㄈ')} leftIcon={<Volume2 size={28} />}>
+                Test Voice: "ㄅㄆㄇㄈ"
+              </Button>
+              <Button variant="pink" size="lg" block onClick={() => speakChinese('媽媽爸爸')} leftIcon={<Volume2 size={28} />}>
+                Test Voice: "媽媽爸爸"
+              </Button>
             </div>
 
             <div className="mt-8 p-6 bg-yellow-50 rounded-2xl">

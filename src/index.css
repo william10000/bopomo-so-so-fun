@@ -3,4 +3,8 @@
 /* App base styles */
 html, body, #root { height: 100%; }
 
+/* Utility: hide scrollbars for horizontal filter chip row on mobile */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 

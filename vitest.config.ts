@@ -6,7 +6,23 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['vitest.setup.ts'],
-    globals: true
+    globals: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'clover'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/main.tsx', // bootstrapping only
+        '**/*.d.ts',
+        '**/*.test.tsx',
+      ],
+      thresholds: {
+        lines: 0.85,
+        functions: 0.85,
+        branches: 0.8,
+        statements: 0.85
+      }
+    }
   }
 });
 

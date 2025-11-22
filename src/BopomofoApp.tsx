@@ -8,6 +8,8 @@ interface SymbolItem {
   pinyin: string;
   sound: string;
   type: BopomofoType;
+  lessons: number[];
+  video: string;
 }
 
 const BopomofoApp = () => {
@@ -134,47 +136,47 @@ const BopomofoApp = () => {
 
   // Starting sounds (Initials/Consonants)
   const startingSounds: SymbolItem[] = [
-    { symbol: 'ㄅ', pinyin: 'b', sound: 'bo', type: 'starting' },
-    { symbol: 'ㄆ', pinyin: 'p', sound: 'po', type: 'starting' },
-    { symbol: 'ㄇ', pinyin: 'm', sound: 'mo', type: 'starting' },
-    { symbol: 'ㄈ', pinyin: 'f', sound: 'fo', type: 'starting' },
-    { symbol: 'ㄉ', pinyin: 'd', sound: 'de', type: 'starting' },
-    { symbol: 'ㄊ', pinyin: 't', sound: 'te', type: 'starting' },
-    { symbol: 'ㄋ', pinyin: 'n', sound: 'ne', type: 'starting' },
-    { symbol: 'ㄌ', pinyin: 'l', sound: 'le', type: 'starting' },
-    { symbol: 'ㄍ', pinyin: 'g', sound: 'ge', type: 'starting' },
-    { symbol: 'ㄎ', pinyin: 'k', sound: 'ke', type: 'starting' },
-    { symbol: 'ㄏ', pinyin: 'h', sound: 'he', type: 'starting' },
-    { symbol: 'ㄐ', pinyin: 'j', sound: 'ji', type: 'starting' },
-    { symbol: 'ㄑ', pinyin: 'q', sound: 'qi', type: 'starting' },
-    { symbol: 'ㄒ', pinyin: 'x', sound: 'xi', type: 'starting' },
-    { symbol: 'ㄓ', pinyin: 'zh', sound: 'zhi', type: 'starting' },
-    { symbol: 'ㄔ', pinyin: 'ch', sound: 'chi', type: 'starting' },
-    { symbol: 'ㄕ', pinyin: 'sh', sound: 'shi', type: 'starting' },
-    { symbol: 'ㄖ', pinyin: 'r', sound: 'ri', type: 'starting' },
-    { symbol: 'ㄗ', pinyin: 'z', sound: 'zi', type: 'starting' },
-    { symbol: 'ㄘ', pinyin: 'c', sound: 'ci', type: 'starting' },
-    { symbol: 'ㄙ', pinyin: 's', sound: 'si', type: 'starting' }
+    { symbol: 'ㄅ', pinyin: 'b', sound: 'bo', type: 'starting', video: 'https://youtu.be/VO6jJSFtNHQ?si=Bd604EXZc2-40Jwz', lessons: [1] },
+    { symbol: 'ㄆ', pinyin: 'p', sound: 'po', type: 'starting', video: 'https://youtu.be/byFIqPItUkU?si=NeMshH7BubGGlH9d', lessons: [3] },
+    { symbol: 'ㄇ', pinyin: 'm', sound: 'mo', type: 'starting', video: 'https://youtu.be/8ufJzeoG4zU?si=MKXm0gvHBN1jg2dX', lessons: [1] },
+    { symbol: 'ㄈ', pinyin: 'f', sound: 'fo', type: 'starting', video: 'https://youtu.be/UHi5tT677WU?si=dK1AnOwvl5TFXyzJ', lessons: [9] },
+    { symbol: 'ㄉ', pinyin: 'd', sound: 'de', type: 'starting', video: 'https://youtu.be/7BU9GAk8P4U?si=dZ-CvjMtrW7wVMZO', lessons: [2] },
+    { symbol: 'ㄊ', pinyin: 't', sound: 'te', type: 'starting', video: 'https://youtu.be/Wa4VUZbZdec?si=m7uMOGJ5ZZjp1_-7', lessons: [6] },
+    { symbol: 'ㄋ', pinyin: 'n', sound: 'ne', type: 'starting', video: 'https://youtu.be/ZVfmPI818os?si=W63DoshsuH18chdp', lessons: [8] },
+    { symbol: 'ㄌ', pinyin: 'l', sound: 'le', type: 'starting', video: 'https://youtu.be/s_62vhLhQc4?si=XLcTjau-r6p06FXo', lessons: [5] },
+    { symbol: 'ㄍ', pinyin: 'g', sound: 'ge', type: 'starting', video: 'https://youtu.be/2oxlqFmmbnQ?si=cr5EpUayYwVKLcKJ', lessons: [2] },
+    { symbol: 'ㄎ', pinyin: 'k', sound: 'ke', type: 'starting', video: 'https://youtu.be/T2fdFFjZFPg?si=4GIgvMxG3qIB9nIG', lessons: [8] },
+    { symbol: 'ㄏ', pinyin: 'h', sound: 'he', type: 'starting', video: 'https://youtu.be/bqyuKUO6ceM?si=Rx3EcxM4ordGj-Gj', lessons: [5] },
+    { symbol: 'ㄐ', pinyin: 'j', sound: 'ji', type: 'starting', video: 'https://youtu.be/HXvqEWv9aOM?si=R0wciO1FufSzOJDF', lessons: [9] },
+    { symbol: 'ㄑ', pinyin: 'q', sound: 'qi', type: 'starting', video: '', lessons: [11] },
+    { symbol: 'ㄒ', pinyin: 'x', sound: 'xi', type: 'starting', video: 'https://youtu.be/8sGTQEM8ejY?si=3MdG8yR1bXcQzjhN', lessons: [7] },
+    { symbol: 'ㄓ', pinyin: 'zh', sound: 'zhi', type: 'starting', video: 'https://youtu.be/aHfZstYkC80?si=Rs9wvj3n_wG7xNet', lessons: [8] },
+    { symbol: 'ㄔ', pinyin: 'ch', sound: 'chi', type: 'starting', video: '', lessons: [11] },
+    { symbol: 'ㄕ', pinyin: 'sh', sound: 'shi', type: 'starting', video: 'https://youtu.be/aHfZstYkC80?si=Rs9wvj3n_wG7xNet', lessons: [5, 12] },
+    { symbol: 'ㄖ', pinyin: 'r', sound: 'ri', type: 'starting', video: 'https://youtu.be/aWJ1adFe7Cs?si=bLjVx8lkYD52m8P_', lessons: [6] },
+    { symbol: 'ㄗ', pinyin: 'z', sound: 'zi', type: 'starting', video: '', lessons: [12] },
+    { symbol: 'ㄘ', pinyin: 'c', sound: 'ci', type: 'starting', video: 'https://youtu.be/IHaf530_T6Q?si=lZB7TwA48VRHpn_t', lessons: [4] },
+    { symbol: 'ㄙ', pinyin: 's', sound: 'si', type: 'starting', video: 'https://youtu.be/xJUV2NNC5YA?si=yATmRacvdjkzjGrz', lessons: [6] }
   ];
 
   // Ending sounds (Finals/Vowels)
   const endingSounds: SymbolItem[] = [
-    { symbol: 'ㄚ', pinyin: 'a', sound: 'a', type: 'ending' },
-    { symbol: 'ㄛ', pinyin: 'o', sound: 'o', type: 'ending' },
-    { symbol: 'ㄜ', pinyin: 'e', sound: 'e', type: 'ending' },
-    { symbol: 'ㄝ', pinyin: 'ê', sound: 'eh', type: 'ending' },
-    { symbol: 'ㄞ', pinyin: 'ai', sound: 'ai', type: 'ending' },
-    { symbol: 'ㄟ', pinyin: 'ei', sound: 'ei', type: 'ending' },
-    { symbol: 'ㄠ', pinyin: 'ao', sound: 'ao', type: 'ending' },
-    { symbol: 'ㄡ', pinyin: 'ou', sound: 'ou', type: 'ending' },
-    { symbol: 'ㄢ', pinyin: 'an', sound: 'an', type: 'ending' },
-    { symbol: 'ㄣ', pinyin: 'en', sound: 'en', type: 'ending' },
-    { symbol: 'ㄤ', pinyin: 'ang', sound: 'ang', type: 'ending' },
-    { symbol: 'ㄥ', pinyin: 'eng', sound: 'eng', type: 'ending' },
-    { symbol: 'ㄦ', pinyin: 'er', sound: 'er', type: 'ending' },
-    { symbol: 'ㄧ', pinyin: 'i', sound: 'yi', type: 'ending' },
-    { symbol: 'ㄨ', pinyin: 'u', sound: 'wu', type: 'ending' },
-    { symbol: 'ㄩ', pinyin: 'ü', sound: 'yu', type: 'ending' }
+    { symbol: 'ㄚ', pinyin: 'a', sound: 'a', type: 'ending', video: 'https://youtu.be/9sNhxaMrGzk?si=AV2rJRmC_swR6T9d',lessons: [1] },
+    { symbol: 'ㄛ', pinyin: 'o', sound: 'o', type: 'ending', video: 'https://youtu.be/XalFfF4wMZI?si=gIjY1lNwRZ8Y2uoU',lessons: [3] },
+    { symbol: 'ㄜ', pinyin: 'e', sound: 'e', type: 'ending', video: 'https://youtu.be/wyd4bK6acmA?si=fdLJITEQEVg4gkb2',lessons: [2] },
+    { symbol: 'ㄝ', pinyin: 'ê', sound: 'eh', type: 'ending', video: 'https://youtu.be/riwQR2LISQI?si=TYoRf8irAcMox1Ed',lessons: [7] },
+    { symbol: 'ㄞ', pinyin: 'ai', sound: 'ai', type: 'ending', video: 'https://youtu.be/vRlLz9xkRxQ?si=eQ5k3fccAAzHVWTD',lessons: [8] },
+    { symbol: 'ㄟ', pinyin: 'ei', sound: 'ei', type: 'ending', video: 'https://youtu.be/Dhp7gkfwuPQ?si=XHrQNpVV7nmJPoFN',lessons: [7] },
+    { symbol: 'ㄠ', pinyin: 'ao', sound: 'ao', type: 'ending', video: 'https://youtu.be/IeYQetOewao?si=9JTIoaVH54ih7WJU',lessons: [4] },
+    { symbol: 'ㄡ', pinyin: 'ou', sound: 'ou', type: 'ending', video: 'https://youtu.be/U7JKNbHSIXM?si=pXhyn2VQID9CIyec',lessons: [3] },
+    { symbol: 'ㄢ', pinyin: 'an', sound: 'an', type: 'ending', video: 'https://youtu.be/eUX6Kjwh_ws?si=xs6jwuGiEQt_8Kjt',lessons: [5] },
+    { symbol: 'ㄣ', pinyin: 'en', sound: 'en', type: 'ending', video: 'https://youtu.be/QKZ8fm19j_k?si=EXMnHmhHpvNohMn1',lessons: [6] },
+    { symbol: 'ㄤ', pinyin: 'ang', sound: 'ang', type: 'ending', video: 'https://youtu.be/XdtFwqcRQzg?si=ykwaBjoZqZkIinzw',lessons: [9] },
+    { symbol: 'ㄥ', pinyin: 'eng', sound: 'eng', type: 'ending', video: '',lessons: [10] },
+    { symbol: 'ㄦ', pinyin: 'er', sound: 'er', type: 'ending', video: 'https://youtu.be/BaZXKrqtM58?si=6t8iM-gbPqc2VM4S',lessons: [4] },
+    { symbol: 'ㄧ', pinyin: 'i', sound: 'yi', type: 'ending', video: 'https://youtu.be/rS689qaig0U?si=oZ7C3xwEN3oJdbFu',lessons: [2] },
+    { symbol: 'ㄨ', pinyin: 'u', sound: 'wu', type: 'ending', video: 'https://youtu.be/dWA4Wv0bVOw?si=rM0akgqxvSX_NBWO',lessons: [3] },
+    { symbol: 'ㄩ', pinyin: 'ü', sound: 'yu', type: 'ending', video: 'https://youtu.be/TALGD7nXThc?si=S5v72joHAICM79rn',lessons: [4, 13] }
   ];
 
   const bopomofoSymbols: SymbolItem[] = [...startingSounds, ...endingSounds];
@@ -206,7 +208,43 @@ const BopomofoApp = () => {
     { word: '家', bopomofo: 'ㄐㄧㄚ', pinyin: 'jiā', english: 'Home' },
     { word: '飯', bopomofo: 'ㄈㄢˋ', pinyin: 'fàn', english: 'Rice/Meal' },
     { word: '牛', bopomofo: 'ㄋㄧㄡˊ', pinyin: 'niú', english: 'Cow' },
-    { word: '羊', bopomofo: 'ㄧㄤˊ', pinyin: 'yáng', english: 'Sheep' }
+    { word: '羊', bopomofo: 'ㄧㄤˊ', pinyin: 'yáng', english: 'Sheep' },
+    // --- Added from image samples ---
+    { word: '斑馬', bopomofo: 'ㄅㄢ ㄇㄚˇ', pinyin: 'bān mǎ', english: 'Zebra' },
+    { word: '螃蟹', bopomofo: 'ㄆㄤˊ ㄒㄧㄝˋ', pinyin: 'páng xiè', english: 'Crab' },
+    { word: '螞蟻', bopomofo: 'ㄇㄚˇ ㄧˇ', pinyin: 'mǎ yǐ', english: 'Ant' },
+    { word: '蜜蜂', bopomofo: 'ㄇㄧˋ ㄈㄥ', pinyin: 'mì fēng', english: 'Bee' },
+    { word: '袋鼠', bopomofo: 'ㄉㄞˋ ㄕㄨˇ', pinyin: 'dài shǔ', english: 'Kangaroo' },
+    { word: '兔子', bopomofo: 'ㄊㄨˋ ㄗˇ', pinyin: 'tù zi', english: 'Rabbit' },
+    { word: '乳牛', bopomofo: 'ㄖㄨˇ ㄋㄧㄡˊ', pinyin: 'rǔ niú', english: 'Dairy Cow' },
+    { word: '哈巴狗', bopomofo: 'ㄏㄚ ㄅㄚ ㄍㄡˇ', pinyin: 'hā bā gǒu', english: 'Pug' },
+    { word: '恐龍', bopomofo: 'ㄎㄨㄥˇ ㄌㄨㄥˊ', pinyin: 'kǒng lóng', english: 'Dinosaur' },
+    { word: '狐狸', bopomofo: 'ㄏㄨˊ ㄌㄧˊ', pinyin: 'hú lí', english: 'Fox' },
+    { word: '烏鴉', bopomofo: 'ㄨ ㄧㄚ', pinyin: 'wū yā', english: 'Crow' },
+    { word: '蜻蜓', bopomofo: 'ㄑㄧㄥ ㄊㄧㄥˊ', pinyin: 'qīng tíng', english: 'Dragonfly' },
+    { word: '蟋蟀', bopomofo: 'ㄒㄧ ㄕㄨㄞˋ', pinyin: 'xī shuài', english: 'Cricket' },
+    { word: '蜘蛛', bopomofo: 'ㄓ ㄓㄨ', pinyin: 'zhī zhū', english: 'Spider' },
+    { word: '長頸鹿', bopomofo: 'ㄔㄤˊ ㄐㄧㄥˇ ㄌㄨˋ', pinyin: 'cháng jǐng lù', english: 'Giraffe' },
+    { word: '老鼠', bopomofo: 'ㄌㄠˇ ㄕㄨˇ', pinyin: 'lǎo shǔ', english: 'Mouse' },
+    { word: '棉花', bopomofo: 'ㄇㄧㄢˊ ㄏㄨㄚ', pinyin: 'mián huā', english: 'Cotton' },
+    { word: '洗澡', bopomofo: 'ㄒㄧˇ ㄗㄠˇ', pinyin: 'xǐ zǎo', english: 'Bathe' },
+    { word: '菜圃', bopomofo: 'ㄘㄞˋ ㄆㄨˇ', pinyin: 'cài pǔ', english: 'Vegetable Patch' },
+    { word: '白鷺鷥', bopomofo: 'ㄅㄞˊ ㄌㄨˋ ㄙ', pinyin: 'bái lù sī', english: 'Egret' },
+    { word: '公雞', bopomofo: 'ㄍㄨㄥ ㄐㄧ', pinyin: 'gōng jī', english: 'Rooster' },
+    { word: '鸚鵡', bopomofo: 'ㄧㄥ ㄨˇ', pinyin: 'yīng wǔ', english: 'Parrot' },
+    { word: '青蛙', bopomofo: 'ㄑㄧㄥ ㄨㄚ', pinyin: 'qīng wā', english: 'Frog' },
+    { word: '蘿蔔', bopomofo: 'ㄌㄨㄛˊ ㄅㄛ', pinyin: 'luó bo', english: 'Radish' },
+    { word: '鴿子', bopomofo: 'ㄍㄜ ㄗˇ', pinyin: 'gē zi', english: 'Pigeon' },
+    { word: '蝴蝶', bopomofo: 'ㄏㄨˊ ㄉㄧㄝˊ', pinyin: 'hú dié', english: 'Butterfly' },
+    { word: '排隊', bopomofo: 'ㄆㄞˊ ㄉㄨㄟˋ', pinyin: 'pái duì', english: 'Line Up' },
+    { word: '烏賊', bopomofo: 'ㄨ ㄗㄟˊ', pinyin: 'wū zéi', english: 'Cuttlefish' },
+    { word: '小貓', bopomofo: 'ㄒㄧㄠˇ ㄇㄠ', pinyin: 'xiǎo māo', english: 'Kitten' },
+    { word: '水中游', bopomofo: 'ㄕㄨㄟˇ ㄓㄨㄥ ㄧㄡˊ', pinyin: 'shuǐ zhōng yóu', english: 'Swim' },
+    { word: '山羊', bopomofo: 'ㄕㄢ ㄧㄤˊ', pinyin: 'shān yáng', english: 'Goat' },
+    { word: '蚯蚓', bopomofo: 'ㄑㄧㄡ ㄧㄣˇ', pinyin: 'qiū yǐn', english: 'Earthworm' },
+    { word: '太陽', bopomofo: 'ㄊㄞˋ ㄧㄤˊ', pinyin: 'tài yáng', english: 'Sun' },
+    { word: '螢火蟲', bopomofo: 'ㄧㄥˊ ㄏㄨㄛˇ ㄔㄨㄥˊ', pinyin: 'yíng huǒ chóng', english: 'Firefly' },
+    { word: '耳朵', bopomofo: 'ㄦˇ ㄉㄨㄛ', pinyin: 'ěr duo', english: 'Ear' }
   ];
 
   const speakChinese = (text: string) => {
@@ -268,6 +306,13 @@ const BopomofoApp = () => {
     </div>
   );
 
+  const getYoutubeId = (url: string) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2] && match[2].length === 11) ? match[2] : null;
+  };
+
   const SymbolScreen = () => {
     const filteredSymbols = getFilteredSymbols();
     let currentSymbol: SymbolItem | null = null;
@@ -314,16 +359,30 @@ const BopomofoApp = () => {
             </div>
 
             {currentSymbol && (
-              <div className={`rounded-3xl p-16 mb-8 ${
+              <div className={`rounded-3xl p-8 md:p-16 mb-8 ${
                 currentSymbol.type === 'starting' 
                   ? 'bg-gradient-to-br from-blue-100 to-cyan-100' 
                   : 'bg-gradient-to-br from-pink-100 to-purple-100'
               }`}>
                 <div className="text-9xl mb-6 font-bold text-purple-800">{currentSymbol.symbol}</div>
                 <div className="text-4xl mb-4 text-gray-700">{currentSymbol.pinyin}</div>
-                <div className="text-2xl text-gray-600">
+                <div className="text-2xl text-gray-600 mb-8">
                   {currentSymbol.type === 'starting' ? '🚀 Starting Sound' : '🎯 Ending Sound'}
                 </div>
+
+                {currentSymbol.video && getYoutubeId(currentSymbol.video) && (
+                  <div className="w-full max-w-2xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-lg border-4 border-white/50">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${getYoutubeId(currentSymbol.video)}`}
+                      title={`Video for ${currentSymbol.symbol}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                )}
               </div>
             )}
 

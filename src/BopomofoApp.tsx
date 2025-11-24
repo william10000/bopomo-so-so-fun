@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Volume2, Home, Printer, Settings } from 'lucide-react';
+import { games } from './constants/games';
 
 type BopomofoType = 'starting' | 'ending';
 
@@ -13,7 +14,7 @@ interface SymbolItem {
 }
 
 const BopomofoApp = () => {
-  const [currentScreen, setCurrentScreen] = useState<'home' | 'symbols' | 'flashcards' | 'worksheet' | 'settings'>('home');
+  const [currentScreen, setCurrentScreen] = useState<'home' | 'symbols' | 'flashcards' | 'worksheet' | 'settings' | 'games'>('home');
   const [currentSymbolIndex, setCurrentSymbolIndex] = useState<number>(0);
   const [currentFlashcard, setCurrentFlashcard] = useState<number>(0);
   const [symbolFilter, setSymbolFilter] = useState<'all' | 'starting' | 'ending'>('all');
@@ -301,6 +302,15 @@ const BopomofoApp = () => {
             <h2 className="text-3xl font-bold text-blue-700 mb-2 text-center">Worksheets</h2>
             <p className="text-lg text-gray-600 text-center">Print practice sheets</p>
           </button>
+
+          <button
+            onClick={() => setCurrentScreen('games')}
+            className="w-full bg-white rounded-3xl p-10 shadow-2xl ring-1 ring-black/5 hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)] transition-transform hover:-translate-y-0.5"
+          >
+            <div className="text-6xl mb-4 text-center">🎮</div>
+            <h2 className="text-3xl font-bold text-amber-600 mb-2 text-center">Games</h2>
+            <p className="text-lg text-gray-600 text-center">Play and learn</p>
+          </button>
         </div>
       </div>
     </div>
@@ -580,6 +590,41 @@ const BopomofoApp = () => {
     );
   };
 
+  const GamesScreen = () => {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-6">
+            <Button onClick={() => setCurrentScreen('home')} leftIcon={<Home size={22} />}>Home</Button>
+          </div>
+
+          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5">
+            <h2 className="text-4xl font-bold text-amber-600 mb-8 text-center">🎮 Games</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {games.map((game, idx) => (
+                <a 
+                  key={idx}
+                  href={game.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block group"
+                >
+                  <div className="bg-amber-50 rounded-2xl p-8 border-2 border-amber-100 hover:border-amber-300 hover:bg-amber-100 transition-all h-full flex flex-col items-center text-center shadow-sm hover:shadow-md">
+                    <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{game.icon}</div>
+                    <h3 className="text-xl font-bold text-gray-800 capitalize group-hover:text-amber-700 transition-colors">
+                      {game.name}
+                    </h3>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const VoiceSettingsScreen = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-8">
@@ -664,6 +709,7 @@ const BopomofoApp = () => {
       {currentScreen === 'symbols' && <SymbolScreen />}
       {currentScreen === 'flashcards' && <FlashcardScreen />}
       {currentScreen === 'worksheet' && <WorksheetScreen />}
+      {currentScreen === 'games' && <GamesScreen />}
       {currentScreen === 'settings' && <VoiceSettingsScreen />}
     </div>
   );

@@ -104,6 +104,28 @@ describe('BopomofoApp - flashcards and worksheet', () => {
   });
 });
 
+describe('BopomofoApp - games', () => {
+  it('navigates to games screen and lists games', () => {
+    render(<BopomofoApp />);
+    // Find and click Games tile
+    fireEvent.click(screen.getByText('Games'));
+
+    // Check header
+    expect(screen.getByText('🎮 Games')).toBeInTheDocument();
+
+    // Check for a specific game
+    const gameLink = screen.getByRole('link', { name: /parts of face and body/i });
+    expect(gameLink).toBeInTheDocument();
+    expect(gameLink).toHaveAttribute('href', 'https://wordwall.net/play/36103/724/766?authuser=0');
+    expect(gameLink).toHaveAttribute('target', '_blank');
+    expect(gameLink).toHaveAttribute('rel', 'noopener noreferrer');
+
+    // Check home button works
+    fireEvent.click(screen.getByRole('button', { name: 'Home' }));
+    expect(screen.getByText('BoPoMo Super Fun!')).toBeInTheDocument();
+  });
+});
+
 describe('BopomofoApp - voice settings', () => {
   it('lists voices and allows testing phrases', () => {
     render(<BopomofoApp />);

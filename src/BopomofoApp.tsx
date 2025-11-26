@@ -149,13 +149,13 @@ const BopomofoApp = () => {
     { symbol: 'ㄎ', pinyin: 'k', sound: 'ke', type: 'starting', video: 'https://youtu.be/T2fdFFjZFPg?si=4GIgvMxG3qIB9nIG', lessons: [8] },
     { symbol: 'ㄏ', pinyin: 'h', sound: 'he', type: 'starting', video: 'https://youtu.be/bqyuKUO6ceM?si=Rx3EcxM4ordGj-Gj', lessons: [5] },
     { symbol: 'ㄐ', pinyin: 'j', sound: 'ji', type: 'starting', video: 'https://youtu.be/HXvqEWv9aOM?si=R0wciO1FufSzOJDF', lessons: [9] },
-    { symbol: 'ㄑ', pinyin: 'q', sound: 'qi', type: 'starting', video: '', lessons: [11] },
+    { symbol: 'ㄑ', pinyin: 'q', sound: 'qi', type: 'starting', video: 'https://youtu.be/95IekL0e6Pw?si=ydkKPlw6csHMivRV', lessons: [11] },
     { symbol: 'ㄒ', pinyin: 'x', sound: 'xi', type: 'starting', video: 'https://youtu.be/8sGTQEM8ejY?si=3MdG8yR1bXcQzjhN', lessons: [7] },
     { symbol: 'ㄓ', pinyin: 'zh', sound: 'zhi', type: 'starting', video: 'https://youtu.be/aHfZstYkC80?si=Rs9wvj3n_wG7xNet', lessons: [8] },
-    { symbol: 'ㄔ', pinyin: 'ch', sound: 'chi', type: 'starting', video: '', lessons: [11] },
+    { symbol: 'ㄔ', pinyin: 'ch', sound: 'chi', type: 'starting', video: 'https://youtu.be/Eqeu5en_Sz4?si=XlJlPBDhyEdmfYeq', lessons: [11] },
     { symbol: 'ㄕ', pinyin: 'sh', sound: 'shi', type: 'starting', video: 'https://youtu.be/aHfZstYkC80?si=Rs9wvj3n_wG7xNet', lessons: [5, 12] },
     { symbol: 'ㄖ', pinyin: 'r', sound: 'ri', type: 'starting', video: 'https://youtu.be/aWJ1adFe7Cs?si=bLjVx8lkYD52m8P_', lessons: [6] },
-    { symbol: 'ㄗ', pinyin: 'z', sound: 'zi', type: 'starting', video: '', lessons: [12] },
+    { symbol: 'ㄗ', pinyin: 'z', sound: 'zi', type: 'starting', video: 'https://youtu.be/Law8VPCRAzo?si=1ozAB9y0Wwsz359x', lessons: [12] },
     { symbol: 'ㄘ', pinyin: 'c', sound: 'ci', type: 'starting', video: 'https://youtu.be/IHaf530_T6Q?si=lZB7TwA48VRHpn_t', lessons: [4] },
     { symbol: 'ㄙ', pinyin: 's', sound: 'si', type: 'starting', video: 'https://youtu.be/xJUV2NNC5YA?si=yATmRacvdjkzjGrz', lessons: [6] }
   ];
@@ -173,7 +173,7 @@ const BopomofoApp = () => {
     { symbol: 'ㄢ', pinyin: 'an', sound: 'an', type: 'ending', video: 'https://youtu.be/eUX6Kjwh_ws?si=xs6jwuGiEQt_8Kjt',lessons: [5] },
     { symbol: 'ㄣ', pinyin: 'en', sound: 'en', type: 'ending', video: 'https://youtu.be/QKZ8fm19j_k?si=EXMnHmhHpvNohMn1',lessons: [6] },
     { symbol: 'ㄤ', pinyin: 'ang', sound: 'ang', type: 'ending', video: 'https://youtu.be/XdtFwqcRQzg?si=ykwaBjoZqZkIinzw',lessons: [9] },
-    { symbol: 'ㄥ', pinyin: 'eng', sound: 'eng', type: 'ending', video: '',lessons: [10] },
+    { symbol: 'ㄥ', pinyin: 'eng', sound: 'eng', type: 'ending', video: 'https://youtu.be/pj-dFkzxIB4?si=9mhMzj4uX-Jcx-xf',lessons: [10] },
     { symbol: 'ㄦ', pinyin: 'er', sound: 'er', type: 'ending', video: 'https://youtu.be/BaZXKrqtM58?si=6t8iM-gbPqc2VM4S',lessons: [4] },
     { symbol: 'ㄧ', pinyin: 'i', sound: 'yi', type: 'ending', video: 'https://youtu.be/rS689qaig0U?si=oZ7C3xwEN3oJdbFu',lessons: [2] },
     { symbol: 'ㄨ', pinyin: 'u', sound: 'wu', type: 'ending', video: 'https://youtu.be/dWA4Wv0bVOw?si=rM0akgqxvSX_NBWO',lessons: [3] },
@@ -500,6 +500,29 @@ const BopomofoApp = () => {
   };
 
   const WorksheetScreen = () => {
+    // Group symbols by lesson
+    const lessons = new Map<number, { starting: SymbolItem[], ending: SymbolItem[] }>();
+    
+    const processSymbols = (items: SymbolItem[]) => {
+      items.forEach(item => {
+        item.lessons.forEach(lesson => {
+          if (!lessons.has(lesson)) {
+            lessons.set(lesson, { starting: [], ending: [] });
+          }
+          if (item.type === 'starting') {
+            lessons.get(lesson)?.starting.push(item);
+          } else {
+            lessons.get(lesson)?.ending.push(item);
+          }
+        });
+      });
+    };
+
+    processSymbols(startingSounds);
+    processSymbols(endingSounds);
+
+    const sortedLessons = Array.from(lessons.keys()).sort((a, b) => a - b);
+
     return (
       <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
         <div className="max-w-6xl mx-auto">
@@ -508,80 +531,74 @@ const BopomofoApp = () => {
             <Button variant="blue" onClick={() => window.print()} leftIcon={<Printer size={22} />}>Print Worksheet</Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 print:shadow-none print:rounded-none">
+          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 print:shadow-none print:rounded-none print:p-8">
             <h1 className="text-5xl font-bold text-center mb-2 text-blue-700">ㄅㄆㄇ・好好玩</h1>
             <p className="text-2xl text-center mb-2 text-purple-600">Practice Worksheet</p>
             <p className="text-center text-xl mb-8 text-gray-600">Name: ___________________  Date: ___________</p>
 
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-blue-700">Part 1A: Starting Sounds (Trace)</h2>
-              <div className="grid grid-cols-6 gap-4 mb-8">
-                {startingSounds.slice(0, 12).map((sym, idx) => (
-                  <div key={idx} className="border-2 border-dashed border-blue-400 rounded-lg p-4 text-center bg-blue-50">
-                    <div className="text-5xl text-gray-300 mb-2">{sym.symbol}</div>
-                    <div className="text-4xl text-gray-400">____</div>
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-8">
+              {sortedLessons.map((lessonNum) => {
+                const lessonData = lessons.get(lessonNum);
+                if (!lessonData) return null;
+                
+                return (
+                  <div key={lessonNum} className="break-inside-avoid border-2 border-purple-100 rounded-xl p-6 bg-purple-50/30">
+                    <h2 className="text-2xl font-bold mb-4 text-purple-700 border-b border-purple-200 pb-2">
+                      Lesson {lessonNum}
+                    </h2>
+                    
+                    <div className="flex flex-wrap gap-6 justify-center">
+                      {/* Starting Sounds */}
+                      {lessonData.starting.map((sym, idx) => (
+                        <div key={`s-${idx}`} className="flex flex-col items-center">
+                          <div className="w-32 h-32 md:w-40 md:h-40 border-4 border-dashed border-blue-300 rounded-2xl flex items-center justify-center bg-white mb-2">
+                            <span 
+                              className="text-7xl md:text-8xl font-bold select-none print:text-transparent"
+                              style={{
+                                WebkitTextStroke: '2px #9ca3af',
+                                color: 'transparent',
+                                WebkitPrintColorAdjust: 'exact',
+                                printColorAdjust: 'exact'
+                              }}
+                            >
+                              {sym.symbol}
+                            </span>
+                          </div>
+                          <div className="text-xl text-gray-400 font-bold">{sym.pinyin}</div>
+                        </div>
+                      ))}
 
-              <h2 className="text-3xl font-bold mb-6 text-pink-700">Part 1B: Ending Sounds (Trace)</h2>
-              <div className="grid grid-cols-6 gap-4">
-                {endingSounds.slice(0, 12).map((sym, idx) => (
-                  <div key={idx} className="border-2 border-dashed border-pink-400 rounded-lg p-4 text-center bg-pink-50">
-                    <div className="text-5xl text-gray-300 mb-2">{sym.symbol}</div>
-                    <div className="text-4xl text-gray-400">____</div>
+                      {/* Separator if both exist */}
+                      {lessonData.starting.length > 0 && lessonData.ending.length > 0 && (
+                        <div className="w-px bg-purple-200 mx-2 hidden md:block"></div>
+                      )}
+
+                      {/* Ending Sounds */}
+                      {lessonData.ending.map((sym, idx) => (
+                        <div key={`e-${idx}`} className="flex flex-col items-center">
+                          <div className="w-32 h-32 md:w-40 md:h-40 border-4 border-dashed border-pink-300 rounded-2xl flex items-center justify-center bg-white mb-2">
+                            <span 
+                              className="text-7xl md:text-8xl font-bold select-none print:text-transparent"
+                              style={{
+                                WebkitTextStroke: '2px #9ca3af',
+                                color: 'transparent',
+                                WebkitPrintColorAdjust: 'exact',
+                                printColorAdjust: 'exact'
+                              }}
+                            >
+                              {sym.symbol}
+                            </span>
+                          </div>
+                          <div className="text-xl text-gray-400 font-bold">{sym.pinyin}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
 
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-pink-700">Part 2: Match the Words</h2>
-              <div className="grid grid-cols-2 gap-6">
-                {flashcards.slice(0, 8).map((card, idx) => (
-                  <div key={idx} className="border-2 border-gray-300 rounded-lg p-6">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-4xl font-bold mb-2">{card.word}</div>
-                        <div className="text-xl text-gray-500">{card.bopomofo}</div>
-                      </div>
-                      <div className="text-2xl text-blue-600">{card.english}</div>
-                    </div>
-                    <div className="mt-4 border-t-2 border-dashed border-gray-300 pt-4">
-                      <div className="text-gray-400">Practice writing: _______________</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-6 text-green-700">Part 3: Color and Learn</h2>
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-4 text-blue-600">🚀 Starting Sounds</h3>
-                <div className="grid grid-cols-6 gap-4">
-                  {startingSounds.slice(0, 6).map((sym, idx) => (
-                    <div key={idx} className="border-4 border-blue-300 rounded-lg p-6 text-center bg-blue-50">
-                      <div className="text-6xl font-bold text-gray-800 mb-2">{sym.symbol}</div>
-                      <div className="text-lg text-gray-600">{sym.pinyin}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-pink-600">🎯 Ending Sounds</h3>
-                <div className="grid grid-cols-6 gap-4">
-                  {endingSounds.slice(0, 6).map((sym, idx) => (
-                    <div key={idx} className="border-4 border-pink-300 rounded-lg p-6 text-center bg-pink-50">
-                      <div className="text-6xl font-bold text-gray-800 mb-2">{sym.symbol}</div>
-                      <div className="text-lg text-gray-600">{sym.pinyin}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 border-t-2 border-gray-300 pt-6 text-center text-gray-500">
+            <div className="mt-12 border-t-2 border-gray-300 pt-6 text-center text-gray-500 break-before-page">
               <p className="text-xl">Great job practicing! 加油！(Jiā yóu - Keep it up!)</p>
             </div>
           </div>

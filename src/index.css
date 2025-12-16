@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'ZhuyinFont';
+  src: url('/fonts/ZhuyinFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-zhuyin {
+  font-family: 'ZhuyinFont', sans-serif;
+}
+
 /* App base styles */
 html, body, #root { height: 100%; }
 
 /* Utility: hide scrollbars for horizontal filter chip row on mobile */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-

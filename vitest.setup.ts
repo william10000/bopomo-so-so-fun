@@ -31,5 +31,3 @@ class MockUtterance {
 
 // @ts-expect-error - provide global for tests
 globalThis.SpeechSynthesisUtterance = MockUtterance;
-
-

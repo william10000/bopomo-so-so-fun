@@ -659,6 +659,26 @@ const BopomofoApp = () => {
       english: "Firefly",
     },
     { word: "耳朵", bopomofo: "ㄦˇ ㄉㄨㄛ", pinyin: "ěr duo", english: "Ear" },
+    // Numbers 1-10
+    { word: "一", bopomofo: "ㄧ", pinyin: "yī", english: "One" },
+    { word: "二", bopomofo: "ㄦˋ", pinyin: "èr", english: "Two" },
+    { word: "三", bopomofo: "ㄙㄢ", pinyin: "sān", english: "Three" },
+    { word: "四", bopomofo: "ㄙˋ", pinyin: "sì", english: "Four" },
+    { word: "五", bopomofo: "ㄨˇ", pinyin: "wǔ", english: "Five" },
+    { word: "六", bopomofo: "ㄌㄧㄡˋ", pinyin: "liù", english: "Six" },
+    { word: "七", bopomofo: "ㄑㄧ", pinyin: "qī", english: "Seven" },
+    { word: "八", bopomofo: "ㄅㄚ", pinyin: "bā", english: "Eight" },
+    { word: "九", bopomofo: "ㄐㄧㄡˇ", pinyin: "jiǔ", english: "Nine" },
+    { word: "十", bopomofo: "ㄕˊ", pinyin: "shí", english: "Ten" },
+    // Basic words
+    { word: "小", bopomofo: "ㄒㄧㄠˇ", pinyin: "xiǎo", english: "Small" },
+    { word: "大", bopomofo: "ㄉㄚˋ", pinyin: "dà", english: "Big" },
+    { word: "人", bopomofo: "ㄖㄣˊ", pinyin: "rén", english: "Person" },
+    { word: "月", bopomofo: "ㄩㄝˋ", pinyin: "yuè", english: "Month/Moon" },
+    { word: "日", bopomofo: "ㄖˋ", pinyin: "rì", english: "Day/Sun" },
+    { word: "木", bopomofo: "ㄇㄨˋ", pinyin: "mù", english: "Wood" },
+    { word: "山", bopomofo: "ㄕㄢ", pinyin: "shān", english: "Mountain" },
+    { word: "早", bopomofo: "ㄗㄠˇ", pinyin: "zǎo", english: "Morning/Early" },
   ];
 
   const speakChinese = (text: string) => {

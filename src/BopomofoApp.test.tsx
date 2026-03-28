@@ -97,7 +97,7 @@ describe("BopomofoApp - flashcards and worksheet", () => {
     const prevAfterNext = screen.getByRole("button", { name: "← Previous" });
     fireEvent.click(prevAfterNext);
     expect(prev).toHaveProperty("disabled", true);
-    expect(screen.getByText(/\d+ \/ 55/)).toBeInTheDocument();
+    expect(screen.getByText(/\d+ \/ 73/)).toBeInTheDocument(); // 73 total flashcards
   });
 
   it("opens worksheet screen and shows print button", () => {

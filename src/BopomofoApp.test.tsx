@@ -49,8 +49,8 @@ describe("BopomofoApp - core interactions", () => {
     render(<BopomofoApp />);
     fireEvent.click(screen.getByText("Learn Symbols"));
 
-    const next = screen.getByRole("button", { name: "Next →" });
-    const prev = screen.getByRole("button", { name: "← Previous" });
+    const next = screen.getByRole("button", { name: "→" });
+    const prev = screen.getByRole("button", { name: "←" });
     const counter = () => screen.getByText(/\d+ \/ \d+/);
 
     // start disabled prev implies index 0
@@ -60,7 +60,7 @@ describe("BopomofoApp - core interactions", () => {
     expect(counter().textContent).toMatch(/2 \/ 37/);
 
     // re-query the button after re-render to avoid stale reference
-    const prevAfterNext = screen.getByRole("button", { name: "← Previous" });
+    const prevAfterNext = screen.getByRole("button", { name: "←" });
     fireEvent.click(prevAfterNext);
     expect(counter().textContent).toMatch(/1 \/ 37/);
   });
@@ -84,8 +84,8 @@ describe("BopomofoApp - flashcards and worksheet", () => {
     render(<BopomofoApp />);
     fireEvent.click(screen.getByText("Flashcards"));
 
-    const next = screen.getByRole("button", { name: "Next →" });
-    const prev = screen.getByRole("button", { name: "← Previous" });
+    const next = screen.getByRole("button", { name: "→" });
+    const prev = screen.getByRole("button", { name: "←" });
     const utterSpy = vi.fn();
     (globalThis as any).SpeechSynthesisUtterance = utterSpy;
     const play = screen.getByText("Play Sound");
@@ -94,7 +94,7 @@ describe("BopomofoApp - flashcards and worksheet", () => {
     expect(utterSpy).toHaveBeenCalled();
 
     fireEvent.click(next);
-    const prevAfterNext = screen.getByRole("button", { name: "← Previous" });
+    const prevAfterNext = screen.getByRole("button", { name: "←" });
     fireEvent.click(prevAfterNext);
     expect(prev).toHaveProperty("disabled", true);
     expect(screen.getByText(/\d+ \/ 73/)).toBeInTheDocument(); // 73 total flashcards

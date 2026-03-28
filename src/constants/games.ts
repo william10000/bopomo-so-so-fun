@@ -1,5 +1,10 @@
 export const games = [
   {
+    name: 'K1 review',
+    url: 'https://wordwall.net/play/36650/379/820',
+    icon: '⛰️🪵👥'
+  },
+  {
     name: 'parts of face and body',
     url: 'https://wordwall.net/play/36103/724/766?authuser=0',
     icon: '👀'

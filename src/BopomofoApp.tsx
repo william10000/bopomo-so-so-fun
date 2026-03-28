@@ -109,6 +109,32 @@ export const FilterChip: React.FC<FilterChipProps> = ({
   </button>
 );
 
+export const ScreenLayout = ({
+  children,
+  className = "p-2 md:p-4",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 ${className}`}
+  >
+    {children}
+  </div>
+);
+
+export const Card = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={`bg-white rounded-3xl shadow-2xl ring-1 ring-black/5 ${className}`}>
+    {children}
+  </div>
+);
+
 const BopomofoApp = () => {
   const [currentScreen, setCurrentScreen] = useState<
     "home" | "symbols" | "flashcards" | "worksheet" | "settings" | "games"
@@ -695,7 +721,7 @@ const BopomofoApp = () => {
   };
 
   const HomeScreen = () => (
-    <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+    <ScreenLayout className="p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-end mb-6">
           <Button
@@ -765,7 +791,7 @@ const BopomofoApp = () => {
           </button>
         </div>
       </div>
-    </div>
+    </ScreenLayout>
   );
 
   const getYoutubeId = (url: string) => {
@@ -793,7 +819,7 @@ const BopomofoApp = () => {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-2 md:p-4">
+      <ScreenLayout>
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
             <Button
@@ -804,7 +830,7 @@ const BopomofoApp = () => {
             </Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-3 md:p-5 shadow-2xl ring-1 ring-black/5 text-center">
+          <Card className="p-3 md:p-5 text-center">
             <h2 className="text-4xl font-bold text-purple-700 mb-6">
               Learn Symbols
             </h2>
@@ -901,7 +927,7 @@ const BopomofoApp = () => {
                 }
                 disabled={currentSymbolIndex === 0}
               >
-                ← Previous
+                ←
               </Button>
               <div className="justify-self-center bg-purple-100 text-gray-900 px-5 py-3 rounded-full text-lg font-semibold min-w-[84px] text-center">
                 {currentSymbolIndex + 1} / {filteredSymbols.length}
@@ -915,12 +941,12 @@ const BopomofoApp = () => {
                 }
                 disabled={currentSymbolIndex === filteredSymbols.length - 1}
               >
-                Next →
+                →
               </Button>
             </div>
-          </div>
+          </Card>
         </div>
-      </div>
+      </ScreenLayout>
     );
   };
 
@@ -935,7 +961,7 @@ const BopomofoApp = () => {
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+      <ScreenLayout>
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
             <Button
@@ -946,7 +972,7 @@ const BopomofoApp = () => {
             </Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
+          <Card className="p-3 md:p-5 text-center">
             <h2 className="text-4xl font-bold text-pink-700 mb-8">
               Flashcards
             </h2>
@@ -986,7 +1012,7 @@ const BopomofoApp = () => {
                 }
                 disabled={currentFlashcard === 0}
               >
-                ← Previous
+                ←
               </Button>
               <div className="justify-self-center bg-purple-100 text-gray-900 px-5 py-3 rounded-full text-lg font-semibold min-w-[84px] text-center">
                 {currentFlashcard + 1} / {flashcards.length}
@@ -1000,12 +1026,12 @@ const BopomofoApp = () => {
                 }
                 disabled={currentFlashcard === flashcards.length - 1}
               >
-                Next →
+                →
               </Button>
             </div>
-          </div>
+          </Card>
         </div>
-      </div>
+      </ScreenLayout>
     );
   };
 
@@ -1037,7 +1063,7 @@ const BopomofoApp = () => {
     const sortedLessons = Array.from(lessons.keys()).sort((a, b) => a - b);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+      <ScreenLayout className="p-6 md:p-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex gap-3 mb-6 print:hidden">
             <Button
@@ -1055,7 +1081,7 @@ const BopomofoApp = () => {
             </Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-12 md:p-14 shadow-2xl ring-1 ring-black/5 print:shadow-none print:rounded-none print:p-8">
+          <Card className="p-12 md:p-14 print:shadow-none print:rounded-none print:p-8">
             <h1 className="text-5xl font-bold text-center mb-2 text-blue-700">
               ㄅㄆㄇ・好好玩
             </h1>
@@ -1147,15 +1173,15 @@ const BopomofoApp = () => {
                 Great job practicing! 加油！(Jiā yóu - Keep it up!)
               </p>
             </div>
-          </div>
+          </Card>
         </div>
-      </div>
+      </ScreenLayout>
     );
   };
 
   const GamesScreen = () => {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+      <ScreenLayout className="p-6 md:p-10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-6">
             <Button
@@ -1166,7 +1192,7 @@ const BopomofoApp = () => {
             </Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5">
+          <Card className="p-8 md:p-14">
             <h2 className="text-4xl font-bold text-amber-600 mb-8 text-center">
               🎮 Games
             </h2>
@@ -1191,9 +1217,9 @@ const BopomofoApp = () => {
                 </a>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
-      </div>
+      </ScreenLayout>
     );
   };
 

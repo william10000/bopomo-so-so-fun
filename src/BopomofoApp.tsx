@@ -793,7 +793,7 @@ const BopomofoApp = () => {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-6 md:p-10">
+      <div className="min-h-screen bg-gradient-to-br from-amber-100 via-rose-100 to-fuchsia-100 p-2 md:p-4">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
             <Button
@@ -804,7 +804,7 @@ const BopomofoApp = () => {
             </Button>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 md:p-14 shadow-2xl ring-1 ring-black/5 text-center">
+          <div className="bg-white rounded-3xl p-3 md:p-5 shadow-2xl ring-1 ring-black/5 text-center">
             <h2 className="text-4xl font-bold text-purple-700 mb-6">
               Learn Symbols
             </h2>
@@ -952,8 +952,8 @@ const BopomofoApp = () => {
             </h2>
 
             {card && (
-              <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl p-16 mb-8">
-                <div className="text-9xl mb-6 font-bold text-gray-800 font-zhuyin leading-relaxed">
+              <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-3xl p-4 sm:p-6 md:p-8 mb-6">
+                <div className="text-7xl sm:text-8xl lg:text-9xl mb-4 font-bold text-gray-800 font-zhuyin leading-snug">
                   {card.word}
                 </div>
                 {/* <div className="text-3xl mb-4 text-purple-700">
